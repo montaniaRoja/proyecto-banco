@@ -1,7 +1,7 @@
-const express       = require('express');
-const logger        = require('morgan');
+const express = require('express');
+const logger = require('morgan');
 const cors = require('cors');
-const bodyParser    = require('body-parser');
+const bodyParser = require('body-parser');
 const app = express();
 app.use(cors());
 // This will be our application entry. We'll setup our server here.

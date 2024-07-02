@@ -1,4 +1,4 @@
-const { Cliente } = require('../models');  // Asegúrate de que la ruta sea correcta
+const { Cliente, Cuenta } = require('../models');
 
 module.exports = {
     create(req, res) {
@@ -36,4 +36,25 @@ module.exports = {
         })
         .catch(error => res.status(400).send({ message: error.message }));
     },
+    async findWithCuentas(req, res) {
+        const { id } = req.params;
+
+        try {
+            const cliente = await Cliente.findOne({
+                where: { id },
+                include: {
+                    model: Cuenta,
+                    attributes: ['id','no_cuenta', 'moneda','saldo'],
+                },
+            });
+
+            if (!cliente) {
+                return res.status(404).send({ message: 'Cliente no encontrado' });
+            }
+
+            return res.status(200).send(cliente);
+        } catch (error) {
+            return res.status(400).send({ message: error.message });
+        }
+    }
 };

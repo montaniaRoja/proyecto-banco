@@ -58,16 +58,22 @@ function agregarClienteATabla(cliente) {
         var id = $(this).data('id');
         var nombre = $(this).data('nombre');
         var nodoc = $(this).data('nodoc');
+        
         const now = new Date();
         const year = now.getFullYear();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const seconds = now.getSeconds();
-        const uniqueNumber = `${year}${hours}${minutes}${seconds}`;
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Meses comienzan en 0
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        const uniqueNumber = `${year}${month}${day}${hours}${minutes}${seconds}`;
+        
         document.getElementById('numeroDoc1').value = nodoc;
         document.getElementById('nombreCliente1').value = nombre;
         document.getElementById('nocuenta').value = uniqueNumber;
     });
+    
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -102,17 +108,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 accountButton.setAttribute("data-id", item.id);
                 accountButton.setAttribute("data-nombre", item.nombre);
                 accountButton.setAttribute("data-nodoc", item.no_doc);
+                
+                transButton.setAttribute("href", `transacciones.html?id=${item.id}&nombre=${encodeURIComponent(item.nombre)}`);
 
+                transButton.setAttribute("data-id", item.id);
+                
                 accountButton.addEventListener('click', function () {
                     var id = accountButton.getAttribute('data-id');
                     var nombre = accountButton.getAttribute('data-nombre');
                     var nodoc = accountButton.getAttribute('data-nodoc');
                     const now = new Date();
-                    const year = now.getFullYear();
-                    const hours = now.getHours();
-                    const minutes = now.getMinutes();
-                    const seconds = now.getSeconds();
-                    const uniqueNumber = `${year}${hours}${minutes}${seconds}`;
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Meses comienzan en 0
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        
+        const uniqueNumber = `${year}${month}${day}${hours}${minutes}${seconds}`;
                     console.log(uniqueNumber);
                     console.log(id);
                     document.getElementById('clienteId').value = id;
@@ -123,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 transButton.addEventListener('click', function(){
                     console.log('boton de transacciones');
+
                 });
 
 
@@ -149,14 +163,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function createTransButton() {
-        var boton = document.createElement("button");
-        boton.innerHTML = "Transacciones";
-        boton.id = "transButton";
-        boton.type = "button";
-        boton.classList.add("btn", "btn-primary", "btn-sm");
-        boton.setAttribute("data-bs-toggle", "modal");
-        boton.setAttribute("data-bs-target", "#transModal");
-        return boton;
+        var boton1 = document.createElement("a");
+        boton1.innerHTML = "Transacciones";
+        boton1.id = "transButton";
+        boton1.classList.add("btn", "btn-primary", "btn-sm");
+        return boton1;
     }
 
 

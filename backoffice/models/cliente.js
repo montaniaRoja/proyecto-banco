@@ -1,44 +1,36 @@
 'use strict';
-const { Model } = require('sequelize');
-
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Cliente extends Model {
     static associate(models) {
-      // Define las asociaciones aquí
+      // define association here
+      Cliente.hasMany(models.Cuenta, { foreignKey: 'id_cliente' });
     }
   }
-
   Cliente.init({
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
     no_doc: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     nombre: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     correo: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        isEmail: true,
-      },
+      allowNull: false
     },
     direccion: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'Cliente',
     tableName: 'tbl_clientes',
-    timestamps: false,
+    timestamps: true
   });
-
   return Cliente;
 };

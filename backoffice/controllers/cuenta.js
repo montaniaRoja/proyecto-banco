@@ -29,7 +29,7 @@ module.exports = {
         })
         .then(cuenta => {
             if (!cuenta) {
-                return res.status(404).send({ message: 'Cliente no encontrado' });
+                return res.status(404).send({ message: 'Cuenta no encontrado' });
             }
             return res.status(200).send(cuenta);
         })
