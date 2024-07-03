@@ -21,7 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     moneda: {
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    saldo: {
+      type: DataTypes.FLOAT,
+      allowNull: true
+  }
   }, {
     sequelize,
     modelName: 'Cuenta',

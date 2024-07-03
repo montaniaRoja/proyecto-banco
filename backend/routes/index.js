@@ -14,6 +14,10 @@ module.exports = (app) => {
     app.post('/api/cuenta/create/:id_cliente', cuentaController.create);
     app.get('/api/cuenta/list', cuentaController.list);
     app.get('/api/cuenta/find/:id', cuentaController.find);
+    app.patch('/api/cuenta/:id', cuentaController.update);  // Usamos PATCH para actualizaciones parciales
 
-    app.post('/api/transaccion/create/:id_cuenta', transaccionController.create);
+
+    app.post('/api/transaccion/create/', transaccionController.create);
+
+
 };

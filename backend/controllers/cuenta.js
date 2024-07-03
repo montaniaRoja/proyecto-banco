@@ -35,4 +35,23 @@ module.exports = {
         })
         .catch(error => res.status(400).send({ message: error.message }));
     },
+    update(req, res) {
+        const { id } = req.params; // Obtenemos el id de los parámetros de la URL
+        const { saldo } = req.body;
+
+        if (!saldo) {
+            return res.status(400).send({ message: 'El saldo es requerido' });
+        }
+
+        return Cuenta.update({ saldo }, {
+            where: { id }
+        })
+        .then(rowsUpdated => {
+            if (rowsUpdated[0] === 0) {
+                return res.status(404).send({ message: 'Cuenta no encontrada' });
+            }
+            return res.status(200).send({ message: 'Cuenta actualizada correctamente' });
+        })
+        .catch(error => res.status(400).send({ message: error.message }));
+    },
 };
