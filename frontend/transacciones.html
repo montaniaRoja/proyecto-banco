@@ -30,7 +30,9 @@
                                     <th>Numero de Cuenta</th>
                                     <th>Moneda</th>
                                     <th>Saldo</th>
-                                    <th class="text-center">Acciones</th>
+                                    <th>Transacciones</th>
+                                    <th>Historial</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody id="cuentasbody">
@@ -61,10 +63,10 @@
                     <form id="transaccionesform">
                         
                         <div class="mb-3">
-                            <input type="hidden" class="form-control" id="modalsaldocuenta" readonly>
+                            <input type="text" class="form-control" id="modalsaldocuenta" readonly>
                             <input type="hidden" class="form-control" id="modalcuentaid" readonly>
                             <label for="exampleInputPassword1" class="form-label">No de Cuenta</label>
-                            <input type="text" class="form-control" id="modalcuentanumero" readonly>
+                            <input type="text" class="form-control" id="modalcuentanumero" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Tipo de Transaccion</label>
@@ -95,7 +97,27 @@
         </div>
     </div>
 
+    <div class="modal fade" id="historialModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Historial Cuenta</h5>
 
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button><br>
+
+            </div>
+
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
     <script src="./cuentas.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

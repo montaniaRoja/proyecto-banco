@@ -1,4 +1,4 @@
-const { Cuenta } = require('../models');  // Asegúrate de que la ruta sea correcta
+const { Cuenta, Transaccion } = require('../models');  // Asegúrate de que la ruta sea correcta
 
 module.exports = {
     create(req, res) {
@@ -53,5 +53,24 @@ module.exports = {
             return res.status(200).send({ message: 'Cuenta actualizada correctamente' });
         })
         .catch(error => res.status(400).send({ message: error.message }));
-    },
+    },async findWithTransacciones(req, res){
+        const { id } = req.params;
+        
+        try{
+            const cuenta= await Cuenta.findOne({
+                where: { id },
+                include: {
+                    model: Transaccion,
+                    attributes:['fecha','tipo_movimiento','monto'],
+                },
+            });
+
+            if(!cuenta){
+                return res.status(404).send({message: 'Cuenta no encontrada'});
+            }
+            return res.status(200).send(cuenta);
+        }catch(error){
+            return res.status(400).send({ message: error.message });
+        }
+    }
 };
